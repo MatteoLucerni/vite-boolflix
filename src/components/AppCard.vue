@@ -21,7 +21,7 @@ export default {
         <h1>
             {{ title }}
         </h1>
-        <h2>
+        <h2 v-if="title !== originalTitle">
             {{ originalTitle }}
         </h2>
         <img class="flag" v-if="srcFlag" :src="srcFlag" alt="flag">
@@ -32,7 +32,8 @@ export default {
             <font-awesome-icon v-for="n in starsNumber" :key="n" :icon="['fas', 'star']" />
             <font-awesome-icon v-for="n in 5 - starsNumber" :key="n" :icon="['far', 'star']" />
         </h2>
-        <img class="cover" :src="`https://image.tmdb.org/t/p/w342/${cover}`" alt="cover">
+        <img v-if="cover" class="cover" :src="`https://image.tmdb.org/t/p/w342/${cover}`" :alt="title">
+        <div v-else class="text-danger d-block fw-bold">COPERTINA NON DISPONIBILE</div>
 
     </div>
 </template>
@@ -50,6 +51,7 @@ export default {
         top: 0;
         right: 0;
         width: 100%;
+        height: 100%;
         z-index: 1;
         display: block;
     }
