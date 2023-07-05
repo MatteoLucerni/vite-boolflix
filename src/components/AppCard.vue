@@ -5,7 +5,13 @@ export default {
         originalTitle: String,
         language: String,
         vote: Number,
-        src: String
+        srcFlag: String,
+        cover: String
+    },
+    computed: {
+        starsNumber() {
+            return Math.ceil(this.vote / 2)
+        }
     }
 }
 </script>
@@ -18,13 +24,15 @@ export default {
         <h2>
             {{ originalTitle }}
         </h2>
-        <img v-if="src" :src="src" alt="flag">
+        <img v-if="srcFlag" :src="srcFlag" alt="flag">
         <h2 v-else>
             Lingua: {{ language }}
         </h2>
         <h2>
-            {{ vote }}
+            <font-awesome-icon v-for="n in starsNumber" :icon="['fas', 'star']" />
+            <font-awesome-icon v-for="n in 5 - starsNumber" :icon="['far', 'star']" />
         </h2>
+        <img :src="`https://image.tmdb.org/t/p/w342/${cover}`" alt="cover">
     </div>
 </template>
 

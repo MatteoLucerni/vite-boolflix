@@ -15,12 +15,20 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <nav class="navbar">
-            <div class="logo fs-1 fw-bold text-danger">
-                Netflix
-            </div>
-            <AppSearchBar @button-clicked="onButtonClicked" />
-        </nav>
-    </div>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo fs-1 fw-bold text-danger">
+                    Netflix
+                </div>
+                <AppSearchBar @button-clicked="onButtonClicked" />
+            </nav>
+        </div>
+    </header>
 </template>
+
+<style scoped>
+header {
+    background-color: black;
+}
+</style>

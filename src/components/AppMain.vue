@@ -21,20 +21,21 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container pt-5">
         <h1>Films</h1>
         <div class="row">
             <div v-for="film in films" class="col-4">
                 <AppCard :title="film.title" :original-title="film.original_title"
-                    :src="getImagePath(film.original_language)" :language="film.original_language"
-                    :vote="film.vote_average" />
+                    :srcFlag="getImagePath(film.original_language)" :language="film.original_language"
+                    :vote="film.vote_average" :cover="film.backdrop_path" />
             </div>
         </div>
+        <hr>
         <h1>Serie Tv:</h1>
         <div class="row">
             <div v-for="serie in series" class="col-4">
                 <AppCard :title="serie.name" :original-title="serie.original_name"
-                    :src="getImagePath(serie.original_language)" :language="serie.original_language"
+                    :srcFlag="getImagePath(serie.original_language)" :language="serie.original_language"
                     :vote="serie.vote_average" />
             </div>
         </div>
