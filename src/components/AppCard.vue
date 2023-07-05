@@ -1,7 +1,10 @@
 <script>
 export default {
     props: {
-        film: Object
+        title: String,
+        originalTitle: String,
+        language: String,
+        vote: Number
     }
 }
 </script>
@@ -9,16 +12,16 @@ export default {
 <template>
     <div class="card">
         <h1>
-            {{ film.title }}
+            {{ title }}
         </h1>
         <h2>
-            {{ film.originalTitle }}
+            {{ originalTitle }}
         </h2>
         <h4>
-            {{ film.language }}
+            {{ language }}
         </h4>
         <h2>
-            {{ film.vote }}
+            {{ vote }}
         </h2>
     </div>
 </template>

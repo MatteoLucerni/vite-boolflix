@@ -17,7 +17,8 @@ export default {
     <div class="container">
         <div class="row">
             <div v-for="film in films" class="col-3">
-                <AppCard :film="film" />
+                <AppCard :title="film.title" :original-title="film.originalTitle" :language="film.language"
+                    :vote="film.vote" />
             </div>
         </div>
     </div>
