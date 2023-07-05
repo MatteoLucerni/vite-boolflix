@@ -4,7 +4,8 @@ export default {
         title: String,
         originalTitle: String,
         language: String,
-        vote: Number
+        vote: Number,
+        src: String
     }
 }
 </script>
@@ -17,9 +18,10 @@ export default {
         <h2>
             {{ originalTitle }}
         </h2>
-        <h4>
-            {{ language }}
-        </h4>
+        <img v-if="src" :src="src" alt="flag">
+        <h2 v-else>
+            Lingua: {{ language }}
+        </h2>
         <h2>
             {{ vote }}
         </h2>
@@ -29,5 +31,10 @@ export default {
 <style scoped>
 .card {
     min-height: 500px;
+}
+
+img {
+    height: 50px;
+    width: 80px;
 }
 </style>
