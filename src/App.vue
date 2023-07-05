@@ -2,7 +2,6 @@
 import axios from 'axios'
 import AppHeader from './components/AppHeader.vue'
 import AppMain from './components/AppMain.vue'
-import { store } from './data/store'
 export default {
   components: {
     AppHeader,
@@ -11,49 +10,39 @@ export default {
   data() {
     return {
       baseUri: 'https://api.themoviedb.org/3',
-      films: store.films
+      api_key: 'fa1af265353665e324748a62f9c6b168',
+      films: []
     }
   },
   methods: {
-    fetchFilms() {
-      // parametri della call
-      const config = {
-        params: {
-          api_key: 'fa1af265353665e324748a62f9c6b168',
-          language: 'it-IT',
-          query: 'anelli'
-        }
-      }
+    fetchFilms(endpoint) {
       // ajax call
-      axios.get(`${this.baseUri}/search/movie`, config).then(
+      axios.get(endpoint).then(
         res => {
           console.log(res.data)
 
-          res.data.results.forEach(result => {
-            this.films.push(
-              {
-                title: result.title,
-                originalTitle: result.original_title,
-                language: result.original_language,
-                vote: result.vote_average
-              }
-            )
-          });
+          this.films = res.data.results
 
-          console.table(this.films)
+          console.log(this.films)
         }
       )
+    },
+    fetchFilterFilms(string) {
+      console.log(string)
+      // monto l'endpoint con il parametro dinamico
+      const filteredUri = `${this.baseUri}/search/movie?api_key=${this.api_key}&query=${string}&language=it-IT`
+
+      console.log(filteredUri)
+      // richiamo la funzione che ha la call usando l'endpoint nuovo
+      this.fetchFilms(filteredUri)
     }
-  },
-  created() {
-    this.fetchFilms()
   }
 }
 </script>
 
 <template>
-  <AppHeader />
-  <AppMain />
+  <AppHeader @search-change="fetchFilterFilms" />
+  <AppMain :films="films" />
 </template>
 
 <style lang="scss">

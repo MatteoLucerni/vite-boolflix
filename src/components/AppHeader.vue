@@ -1,19 +1,12 @@
 <script>
-import { store } from '../data/store'
+
 import AppSearchBar from './AppSearchBar.vue'
 export default {
     components: {
         AppSearchBar
     },
-    data() {
-        return {
-
-        }
-    },
     methods: {
         onButtonClicked(string) {
-            store.userSearch = string
-
             this.$emit('search-change', string)
         }
     },

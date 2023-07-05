@@ -1,14 +1,11 @@
 <script>
-import { store } from '../data/store'
 import AppCard from './AppCard.vue'
 export default {
-    data() {
-        return {
-            films: store.films,
-        }
-    },
     components: {
         AppCard
+    },
+    props: {
+        films: Array
     }
 }
 </script>
@@ -16,9 +13,9 @@ export default {
 <template>
     <div class="container">
         <div class="row">
-            <div v-for="film in films" class="col-3">
-                <AppCard :title="film.title" :original-title="film.originalTitle" :language="film.language"
-                    :vote="film.vote" />
+            <div v-for="film in films" class="col-4">
+                <AppCard :title="film.title" :original-title="film.original_title" :language="film.original_language"
+                    :vote="film.vote_average" />
             </div>
         </div>
     </div>
