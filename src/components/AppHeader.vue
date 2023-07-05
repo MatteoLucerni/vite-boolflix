@@ -19,7 +19,7 @@ export default {
         <div class="container">
             <nav class="navbar">
                 <div class="logo fs-1 fw-bold text-danger">
-                    Netflix
+                    BoolFlix
                 </div>
                 <AppSearchBar @button-clicked="onButtonClicked" />
             </nav>
