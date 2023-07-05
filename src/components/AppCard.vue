@@ -41,6 +41,7 @@ export default {
 <style  lang="scss" scoped>
 .card {
     height: 531px;
+    width: 350px;
     position: relative;
     color: white;
     cursor: pointer;
