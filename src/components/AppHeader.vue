@@ -11,20 +11,23 @@ export default {
         }
     },
     methods: {
-        saveUserSearch(string) {
+        onButtonClicked(string) {
             store.userSearch = string
+
+            this.$emit('search-change', string)
         }
-    }
+    },
+    emits: ['search-change']
 }
 </script>
 
 <template>
     <div class="container">
-        <nav class="navbar border-bottom">
+        <nav class="navbar">
             <div class="logo fs-1 fw-bold text-danger">
                 Netflix
             </div>
-            <AppSearchBar @button-clicked="saveUserSearch" />
+            <AppSearchBar @button-clicked="onButtonClicked" />
         </nav>
     </div>
 </template>

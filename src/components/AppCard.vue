@@ -10,7 +10,7 @@ export default {
 </script>
 
 <template>
-    <div class="card">
+    <div class="card p-4 mb-4">
         <h1>
             {{ title }}
         </h1>
@@ -25,3 +25,9 @@ export default {
         </h2>
     </div>
 </template>
+
+<style scoped>
+.card {
+    min-height: 500px;
+}
+</style>
