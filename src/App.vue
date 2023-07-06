@@ -2,6 +2,7 @@
 import axios from 'axios'
 import AppHeader from './components/AppHeader.vue'
 import AppMain from './components/AppMain.vue'
+import { store } from './data/store'
 export default {
   components: {
     AppHeader,
@@ -9,8 +10,8 @@ export default {
   },
   data() {
     return {
-      baseUri: 'https://api.themoviedb.org/3',
-      api_key: 'fa1af265353665e324748a62f9c6b168',
+      baseUri: store.baseUri,
+      api_key: store.api_key,
       films: [],
       series: []
     }

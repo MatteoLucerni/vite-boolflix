@@ -1,4 +1,7 @@
 <script>
+import axios from 'axios';
+import { store } from '../data/store';
+
 export default {
     props: {
         title: String,
@@ -6,7 +9,28 @@ export default {
         language: String,
         vote: Number,
         srcFlag: String,
-        cover: String
+        cover: String,
+        id: Number
+    },
+    data() {
+        return {
+            api_key: store.api_key,
+            baseUri: store.baseUri
+        }
+    },
+    methods: {
+        fetchActors(id) {
+            axios.get(`${this.baseUri}/movie/${id}/credits?api_key=${this.api_key}`).then(
+                res => {
+                    const actors = []
+                    for (let i = 0; i > 5; i++) {
+                        console.log(res.data.cast[i].name)
+                        actors.push(res.data.cast[i].name)
+                    }
+                    console.log(actors)
+                }
+            )
+        }
     },
     computed: {
         starsNumber() {
@@ -34,6 +58,7 @@ export default {
         </h2>
         <img v-if="cover" class="cover" :src="`https://image.tmdb.org/t/p/w342/${cover}`" :alt="title">
         <div v-else class="text-danger d-block fw-bold">COPERTINA NON DISPONIBILE</div>
+        <button @click="fetchActors(id)" class="btn btn-primary">Scopri gli attori</button>
 
     </div>
 </template>
@@ -45,6 +70,7 @@ export default {
     position: relative;
     color: white;
     cursor: pointer;
+    overflow-y: auto;
 
     img.cover {
         position: absolute;
