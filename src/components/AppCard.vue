@@ -51,7 +51,6 @@ export default {
         <h4 v-if="actors">
             Attori: {{ actors }}
         </h4>
-
     </div>
 </template>
 
@@ -91,6 +90,7 @@ export default {
 .card * {
     z-index: 2;
     display: none;
+    margin-bottom: 15px;
 }
 
 img.flag {
