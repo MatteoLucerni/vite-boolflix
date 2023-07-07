@@ -54,8 +54,9 @@ export default {
             // prendo i primi 5 attori
             for (let i = 0; i < 5; i++) {
               // if in caso non ci siano almeno 5 attori
-              if (res.data.cast[i]) actorsList += (` (${res.data.cast[i].name}) `)
+              if (res.data.cast[i]) actorsList += ` (${res.data.cast[i].name}) `
             }
+            if (res.data.cast.length > 5) actorsList += ' ...'
             target.actors = actorsList
           }
         )
