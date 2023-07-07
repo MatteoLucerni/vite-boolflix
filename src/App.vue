@@ -17,27 +17,19 @@ export default {
     }
   },
   methods: {
-    fetchFilms(endpoint) {
+    fetchContent(endpoint, string) {
       // ajax call
       axios.get(endpoint).then(
-        res => {
+        (res) => {
           console.log(res.data)
 
-          this.films = res.data.results
-
-          this.fetchActors('movie', this.films)
-        }
-      )
-    },
-    fetchSeries(endpoint) {
-      // ajax call
-      axios.get(endpoint).then(
-        res => {
-          console.log(res.data)
-
-          this.series = res.data.results
-
-          this.fetchActors('tv', this.series)
+          if (string === 'movie') {
+            this.films = res.data.results
+            this.fetchActors(string, this.films)
+          } else {
+            this.series = res.data.results
+            this.fetchActors(string, this.series)
+          }
         }
       )
     },
@@ -48,8 +40,8 @@ export default {
       const filteredUriSeries = `${this.baseUri}/search/tv?api_key=${this.api_key}&query=${string}&language=it-IT`
 
       // richiamo la funzione che ha la call usando l'endpoint nuovo
-      this.fetchFilms(filteredUriFilms)
-      this.fetchSeries(filteredUriSeries)
+      this.fetchContent(filteredUriFilms, 'movie')
+      this.fetchContent(filteredUriSeries, 'tv')
     },
     fetchActors(path, targets) {
       // una chiamata per ogni film/serie che esce nella ricerca
