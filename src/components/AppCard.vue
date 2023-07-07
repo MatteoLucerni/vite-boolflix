@@ -10,7 +10,8 @@ export default {
         vote: Number,
         srcFlag: String,
         cover: String,
-        id: Number
+        id: Number,
+        actors: Array
     },
     data() {
         return {
@@ -19,18 +20,7 @@ export default {
         }
     },
     methods: {
-        fetchActors(id) {
-            axios.get(`${this.baseUri}/movie/${id}/credits?api_key=${this.api_key}`).then(
-                res => {
-                    const actors = []
-                    for (let i = 0; i > 5; i++) {
-                        console.log(res.data.cast[i].name)
-                        actors.push(res.data.cast[i].name)
-                    }
-                    console.log(actors)
-                }
-            )
-        }
+
     },
     computed: {
         starsNumber() {
@@ -58,7 +48,9 @@ export default {
         </h2>
         <img v-if="cover" class="cover" :src="`https://image.tmdb.org/t/p/w342/${cover}`" :alt="title">
         <div v-else class="text-danger d-block fw-bold">COPERTINA NON DISPONIBILE</div>
-        <button @click="fetchActors(id)" class="btn btn-primary">Scopri gli attori</button>
+        <h4 v-if="actors">
+            Attori: {{ actors }}
+        </h4>
 
     </div>
 </template>

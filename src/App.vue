@@ -25,7 +25,7 @@ export default {
 
           this.films = res.data.results
 
-          console.log('Films: ' + this.films)
+          this.fetchActors('movie', this.films)
         }
       )
     },
@@ -37,7 +37,7 @@ export default {
 
           this.series = res.data.results
 
-          console.log('Series: ' + this.series)
+          this.fetchActors('tv', this.series)
         }
       )
     },
@@ -47,11 +47,25 @@ export default {
       const filteredUriFilms = `${this.baseUri}/search/movie?api_key=${this.api_key}&query=${string}&language=it-IT`
       const filteredUriSeries = `${this.baseUri}/search/tv?api_key=${this.api_key}&query=${string}&language=it-IT`
 
-      console.log(filteredUriFilms)
-      console.log(filteredUriSeries)
       // richiamo la funzione che ha la call usando l'endpoint nuovo
       this.fetchFilms(filteredUriFilms)
       this.fetchSeries(filteredUriSeries)
+    },
+    fetchActors(path, targets) {
+      // una chiamata per ogni film/serie che esce nella ricerca
+      targets.forEach(target => {
+        // chiamata ajax per gli attori
+        axios.get(`${store.baseUri}/${path}/${target.id}/credits?api_key=${store.api_key}`).then(
+          res => {
+
+            let actorsList = ''
+            for (let i = 0; i < 5; i++) {
+              if (res.data.cast[i]) actorsList += (` (${res.data.cast[i].name}) `)
+            }
+            target.actors = actorsList
+          }
+        )
+      })
     }
   }
 }

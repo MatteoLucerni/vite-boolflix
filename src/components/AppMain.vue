@@ -4,6 +4,11 @@ export default {
     components: {
         AppCard
     },
+    data() {
+        return {
+            actors: []
+        }
+    },
     methods: {
         getImagePath(imageName) {
             if (imageName === 'en' || imageName === 'it') {
@@ -11,7 +16,7 @@ export default {
             } else {
                 return
             }
-        }
+        },
     },
     props: {
         films: Array,
@@ -28,7 +33,7 @@ export default {
                 <div v-for="film in films" :key="film.name" class="col-12 col-md-6 col-xl-4">
                     <AppCard :title="film.title" :original-title="film.original_title"
                         :srcFlag="getImagePath(film.original_language)" :language="film.original_language"
-                        :vote="film.vote_average" :cover="film.poster_path" :id="film.id" />
+                        :vote="film.vote_average" :cover="film.poster_path" :actors="film.actors" />
                 </div>
             </div>
             <hr>
@@ -37,7 +42,7 @@ export default {
                 <div v-for="serie in series" :key="serie.name" class="col-12 col-md-6 col-xl-4">
                     <AppCard :title="serie.name" :original-title="serie.original_name"
                         :srcFlag="getImagePath(serie.original_language)" :language="serie.original_language"
-                        :vote="serie.vote_average" :cover="serie.poster_path" :id="serie.id" />
+                        :vote="serie.vote_average" :cover="serie.poster_path" :actors="serie.actors" />
                 </div>
             </div>
         </div>
