@@ -32,12 +32,13 @@ export default {
 
 <template>
     <div class="card d-flex flex-column justify-content-between p-4 mb-4">
-        <h1>
+        <h2>
             {{ title }}
-        </h1>
-        <h2 v-if="title !== originalTitle">
-            {{ originalTitle }}
         </h2>
+        <hr class="m-0">
+        <h3 v-if="title !== originalTitle">
+            {{ originalTitle }}
+        </h3>
         <img class="flag" v-if="srcFlag" :src="srcFlag" alt="flag">
         <h2 v-else>
             Lingua: {{ language }}
@@ -61,7 +62,7 @@ export default {
     position: relative;
     color: white;
     cursor: pointer;
-    overflow-y: auto;
+
 
     img.cover {
         position: absolute;
@@ -72,6 +73,7 @@ export default {
         height: 100%;
         z-index: 1;
         display: block;
+        transition: opacity 0.7s;
     }
 
     &:hover {
@@ -83,7 +85,7 @@ export default {
     }
 
     &:hover img.cover {
-        display: none;
+        opacity: 0;
     }
 }
 
