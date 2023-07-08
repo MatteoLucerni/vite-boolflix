@@ -20,7 +20,8 @@ export default {
     },
     props: {
         films: Array,
-        series: Array
+        series: Array,
+        isFirstSearch: Boolean
     }
 }
 </script>
@@ -28,7 +29,8 @@ export default {
 <template>
     <div class="container pt-5">
         <div v-if="films.length || series.length">
-            <h1>Films</h1>
+            <a class="btn btn-secondary mb-5" href="#series">Vai alle Serie</a>
+            <h1 class="text-white">Film:</h1>
             <div class="row">
                 <div v-for="film in films" :key="film.name" class="col-12 col-md-6 col-xl-4">
                     <AppCard :title="film.title" :original-title="film.original_title"
@@ -37,9 +39,9 @@ export default {
                 </div>
             </div>
             <hr>
-            <h1>Serie Tv:</h1>
+            <h1 class="text-white">Serie Tv:</h1>
             <div class="row">
-                <div v-for="serie in series" :key="serie.name" class="col-12 col-md-6 col-xl-4">
+                <div id="series" v-for="serie in series" :key="serie.name" class="col-12 col-md-6 col-xl-4">
                     <AppCard :title="serie.name" :original-title="serie.original_name"
                         :srcFlag="getImagePath(serie.original_language)" :language="serie.original_language"
                         :vote="serie.vote_average" :cover="serie.poster_path" :actors="serie.actors"
@@ -47,10 +49,13 @@ export default {
                 </div>
             </div>
         </div>
-        <div v-else>
-            <h1 class="text-center mt-5">
+        <div v-else-if="isFirstSearch === true">
+            <h1 class="text-center text-white mt-5">
                 Cerca un film o una serie...
             </h1>
+        </div>
+        <div v-else>
+            <h1 class="text-center text-white mt-5">Nessun risultato, prova a cercare qualcos'altro</h1>
         </div>
     </div>
 </template>

@@ -100,4 +100,21 @@ img.flag {
     height: 50px;
     width: 80px;
 }
+
+// scrollbar
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+    border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 25px;
+    border: 1px solid gray;
+}
 </style>

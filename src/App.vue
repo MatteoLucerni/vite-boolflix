@@ -14,8 +14,9 @@ export default {
       api_key: store.api_key,
       films: [],
       series: [],
-      serieGenres: [],
-      filmsGenres: []
+      seriesGenres: [],
+      filmsGenres: [],
+      isFirstSearch: true
     }
   },
   methods: {
@@ -41,7 +42,8 @@ export default {
       )
     },
     fetchFilter(string) {
-      console.log(string)
+      console.log('Hai cercato: ' + string)
+      this.isFirstSearch = false
       // monto l'endpoint con il parametro dinamico
       const filteredUriFilms = `${this.baseUri}/search/movie?api_key=${this.api_key}&query=${string}&language=it-IT`
       const filteredUriSeries = `${this.baseUri}/search/tv?api_key=${this.api_key}&query=${string}&language=it-IT`
@@ -103,7 +105,7 @@ export default {
 
 <template>
   <AppHeader @search-change="fetchFilter" />
-  <AppMain :films="films" :series="series" />
+  <AppMain :films="films" :series="series" :isFirstSearch=isFirstSearch />
 </template>
 
 <style lang="scss">
