@@ -34,6 +34,7 @@ export default {
 
           // funzione per selezionare il genere corrente
           this.getContentGenre(this.filmsGenres, this.films)
+          this.getContentGenre(this.seriesGenres, this.series)
 
           console.log(res.data)
         }
@@ -74,6 +75,11 @@ export default {
       axios.get(`${store.baseUri}/genre/movie/list?api_key=${store.api_key}&language=it-IT`).then(
         res => {
           this.filmsGenres = res.data
+        }
+      )
+      axios.get(`${store.baseUri}/genre/tv/list?api_key=${store.api_key}&language=it-IT`).then(
+        res => {
+          this.seriesGenres = res.data
         }
       )
     },

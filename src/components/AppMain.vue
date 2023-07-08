@@ -42,7 +42,8 @@ export default {
                 <div v-for="serie in series" :key="serie.name" class="col-12 col-md-6 col-xl-4">
                     <AppCard :title="serie.name" :original-title="serie.original_name"
                         :srcFlag="getImagePath(serie.original_language)" :language="serie.original_language"
-                        :vote="serie.vote_average" :cover="serie.poster_path" :actors="serie.actors" />
+                        :vote="serie.vote_average" :cover="serie.poster_path" :actors="serie.actors"
+                        :genres="serie.genres" />
                 </div>
             </div>
         </div>

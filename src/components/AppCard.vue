@@ -49,9 +49,9 @@ export default {
         <h4 v-if="actors">
             Attori: {{ actors }}
         </h4>
-        <h2 v-if="genres">
+        <h4 v-if="genres">
             Generi: {{ genres }}
-        </h2>
+        </h4>
     </div>
 </template>
 
