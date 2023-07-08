@@ -88,15 +88,17 @@ export default {
     getContentGenre(genresList, targets) {
       targets.forEach(target => {
         target.genres = ''
-        const contentGenre = genresList.genres.filter(genre => {
-          for (let i = 0; i < target.genre_ids.length; i++) {
-            if (genre.id === target.genre_ids[i]) return genre.name
-          }
-        })
+        if (genresList.genres) {
+          const contentGenre = genresList.genres.filter(genre => {
+            for (let i = 0; i < target.genre_ids.length; i++) {
+              if (genre.id === target.genre_ids[i]) return genre.name
+            }
+          })
 
-        contentGenre.forEach(gen => {
-          target.genres += ` ${gen.name} `
-        })
+          contentGenre.forEach(gen => {
+            target.genres += ` ${gen.name} `
+          })
+        }
       })
     }
   }
@@ -109,5 +111,5 @@ export default {
 </template>
 
 <style lang="scss">
-@use './assets/sass/style.scss'
+@use './assets/sass/style.scss';
 </style>

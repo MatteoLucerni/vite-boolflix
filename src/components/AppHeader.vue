@@ -18,7 +18,7 @@ export default {
     <header>
         <div class="container">
             <nav class="navbar">
-                <div class="logo fs-1 fw-bold text-danger">
+                <div class="logo fs-1 fw-bold">
                     BoolFlix
                 </div>
                 <AppSearchBar @button-clicked="onButtonClicked" />
@@ -30,5 +30,9 @@ export default {
 <style scoped>
 header {
     background-color: black;
+}
+
+.logo {
+    color: #e50815;
 }
 </style>
