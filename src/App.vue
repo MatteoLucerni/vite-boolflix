@@ -13,7 +13,9 @@ export default {
       baseUri: store.baseUri,
       api_key: store.api_key,
       films: [],
-      series: []
+      series: [],
+      serieGenres: [],
+      filmsGenres: []
     }
   },
   methods: {
@@ -38,7 +40,8 @@ export default {
       // monto l'endpoint con il parametro dinamico
       const filteredUriFilms = `${this.baseUri}/search/movie?api_key=${this.api_key}&query=${string}&language=it-IT`
       const filteredUriSeries = `${this.baseUri}/search/tv?api_key=${this.api_key}&query=${string}&language=it-IT`
-
+      // prendo i generi
+      this.fetchGenresList()
       // richiamo la funzione che ha la call usando l'endpoint nuovo
       this.fetchContent(filteredUriFilms, 'movie')
       this.fetchContent(filteredUriSeries, 'tv')
@@ -62,6 +65,18 @@ export default {
           }
         )
       })
+    },
+    fetchGenresList() {
+      axios.get(`${store.baseUri}/genre/movie/list?api_key=${store.api_key}`).then(
+        res => {
+          this.filmsGenres = res.data
+
+          console.table(this.filmsGenres)
+        }
+      )
+    },
+    getContentGenre() {
+
     }
   }
 }
