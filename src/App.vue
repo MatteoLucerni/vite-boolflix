@@ -56,6 +56,7 @@ export default {
               // if in caso non ci siano almeno 5 attori
               if (res.data.cast[i]) actorsList += ` (${res.data.cast[i].name}) `
             }
+            // in caso ci siano più di 5 attori
             if (res.data.cast.length > 5) actorsList += ' ...'
             target.actors = actorsList
           }

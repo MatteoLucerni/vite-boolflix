@@ -11,7 +11,7 @@ export default {
         srcFlag: String,
         cover: String,
         id: Number,
-        actors: Array
+        actors: String
     },
     data() {
         return {
