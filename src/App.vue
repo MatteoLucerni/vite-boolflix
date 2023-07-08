@@ -23,7 +23,6 @@ export default {
       // ajax call
       axios.get(endpoint).then(
         (res) => {
-          console.log(res.data)
 
           if (string === 'movie') {
             this.films = res.data.results
@@ -32,6 +31,11 @@ export default {
             this.series = res.data.results
             this.fetchActors(string, this.series)
           }
+
+          // funzione per selezionare il genere corrente
+          this.getContentGenre(this.filmsGenres, this.films)
+
+          console.log(res.data)
         }
       )
     },
@@ -40,7 +44,7 @@ export default {
       // monto l'endpoint con il parametro dinamico
       const filteredUriFilms = `${this.baseUri}/search/movie?api_key=${this.api_key}&query=${string}&language=it-IT`
       const filteredUriSeries = `${this.baseUri}/search/tv?api_key=${this.api_key}&query=${string}&language=it-IT`
-      // prendo i generi
+      // funzione per prendere i generi
       this.fetchGenresList()
       // richiamo la funzione che ha la call usando l'endpoint nuovo
       this.fetchContent(filteredUriFilms, 'movie')
@@ -57,7 +61,7 @@ export default {
             // prendo i primi 5 attori
             for (let i = 0; i < 5; i++) {
               // if in caso non ci siano almeno 5 attori
-              if (res.data.cast[i]) actorsList += ` (${res.data.cast[i].name}) `
+              if (res.data.cast[i]) actorsList += ` ${res.data.cast[i].name}, `
             }
             // in caso ci siano più di 5 attori
             if (res.data.cast.length > 5) actorsList += ' ...'
@@ -67,16 +71,25 @@ export default {
       })
     },
     fetchGenresList() {
-      axios.get(`${store.baseUri}/genre/movie/list?api_key=${store.api_key}`).then(
+      axios.get(`${store.baseUri}/genre/movie/list?api_key=${store.api_key}&language=it-IT`).then(
         res => {
           this.filmsGenres = res.data
-
-          console.table(this.filmsGenres)
         }
       )
     },
-    getContentGenre() {
+    getContentGenre(genresList, targets) {
+      targets.forEach(target => {
+        target.genres = ''
+        const contentGenre = genresList.genres.filter(genre => {
+          for (let i = 0; i < target.genre_ids.length; i++) {
+            if (genre.id === target.genre_ids[i]) return genre.name
+          }
+        })
 
+        contentGenre.forEach(gen => {
+          target.genres += ` ${gen.name} `
+        })
+      })
     }
   }
 }

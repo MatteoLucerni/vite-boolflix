@@ -1,5 +1,4 @@
 <script>
-import axios from 'axios';
 import { store } from '../data/store';
 
 export default {
@@ -11,16 +10,14 @@ export default {
         srcFlag: String,
         cover: String,
         id: Number,
-        actors: String
+        actors: String,
+        genres: String
     },
     data() {
         return {
             api_key: store.api_key,
             baseUri: store.baseUri
         }
-    },
-    methods: {
-
     },
     computed: {
         starsNumber() {
@@ -52,6 +49,9 @@ export default {
         <h4 v-if="actors">
             Attori: {{ actors }}
         </h4>
+        <h2 v-if="genres">
+            Generi: {{ genres }}
+        </h2>
     </div>
 </template>
 
@@ -62,6 +62,7 @@ export default {
     position: relative;
     color: white;
     cursor: pointer;
+    overflow-y: auto;
 
 
     img.cover {

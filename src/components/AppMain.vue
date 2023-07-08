@@ -33,7 +33,7 @@ export default {
                 <div v-for="film in films" :key="film.name" class="col-12 col-md-6 col-xl-4">
                     <AppCard :title="film.title" :original-title="film.original_title"
                         :srcFlag="getImagePath(film.original_language)" :language="film.original_language"
-                        :vote="film.vote_average" :cover="film.poster_path" :actors="film.actors" />
+                        :vote="film.vote_average" :cover="film.poster_path" :actors="film.actors" :genres="film.genres" />
                 </div>
             </div>
             <hr>
