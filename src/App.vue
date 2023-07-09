@@ -16,7 +16,9 @@ export default {
       series: [],
       seriesGenres: [],
       filmsGenres: [],
-      isFirstSearch: true
+      isFirstSearch: true,
+      filteredFilmsByGenre: [],
+      filteredSeriesByGenre: []
     }
   },
   methods: {
@@ -100,14 +102,31 @@ export default {
           })
         }
       })
+
+      this.filteredFilmsByGenre = this.films
+      this.filteredSeriesByGenre = this.series
+    },
+    changeGenreFilter(genre) {
+      if (genre === '--') {
+        this.filteredFilmsByGenre = this.films
+        this.filteredSeriesByGenre = this.series
+      } else {
+        this.filteredFilmsByGenre = this.films.filter(film => {
+          return film.genres.includes(genre)
+        })
+        this.filteredSeriesByGenre = this.series.filter(serie => {
+          return serie.genres.includes(genre)
+        })
+      }
     }
   }
 }
 </script>
 
 <template>
-  <AppHeader @search-change="fetchFilter" />
-  <AppMain :films="films" :series="series" :isFirstSearch=isFirstSearch />
+  <AppHeader @search-change="fetchFilter" @changed-option="changeGenreFilter" :filmsGenres="filmsGenres"
+    :isFirstSearch="isFirstSearch" />
+  <AppMain :films="filteredFilmsByGenre" :series="filteredSeriesByGenre" :isFirstSearch="isFirstSearch" />
 </template>
 
 <style lang="scss">

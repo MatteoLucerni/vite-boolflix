@@ -2,6 +2,15 @@
 
 import AppSearchBar from './AppSearchBar.vue'
 export default {
+    props: {
+        filmsGenres: Object,
+        isFirstSearch: Boolean
+    },
+    data() {
+        return {
+            selectedGenre: '--'
+        }
+    },
     components: {
         AppSearchBar
     },
@@ -10,7 +19,7 @@ export default {
             this.$emit('search-change', string)
         }
     },
-    emits: ['search-change']
+    emits: ['search-change', 'changed-option']
 }
 </script>
 
@@ -21,6 +30,12 @@ export default {
                 <div class="logo fs-1 fw-bold">
                     BoolFlix
                 </div>
+                <select v-model="selectedGenre" @change="$emit('changed-option', selectedGenre)" class="form-select w-25">
+                    <option selected>--</option>
+                    <option v-if="isFirstSearch === true">Cerca qualcosa per poter filtrare
+                    </option>
+                    <option v-for="genre in this.filmsGenres.genres">{{ genre.name }}</option>
+                </select>
                 <AppSearchBar @button-clicked="onButtonClicked" />
             </nav>
         </div>
