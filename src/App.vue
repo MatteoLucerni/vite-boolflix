@@ -47,8 +47,6 @@ export default {
       // monto l'endpoint con il parametro dinamico
       const filteredUriFilms = `${this.baseUri}/search/movie?api_key=${this.api_key}&query=${string}&language=it-IT`
       const filteredUriSeries = `${this.baseUri}/search/tv?api_key=${this.api_key}&query=${string}&language=it-IT`
-      // funzione per prendere i generi
-      this.fetchGenresList()
       // richiamo la funzione che ha la call usando l'endpoint nuovo
       this.fetchContent(filteredUriFilms, 'movie')
       this.fetchContent(filteredUriSeries, 'tv')
@@ -101,12 +99,15 @@ export default {
         }
       })
     }
-  }
+  },
+  created() {
+    this.fetchGenresList
+  },
 }
 </script>
 
 <template>
-  <AppHeader @search-change="fetchFilter" />
+  <AppHeader @search-change="fetchFilter" :filmsGenres="filmsGenres" />
   <AppMain :films="films" :series="series" :isFirstSearch=isFirstSearch />
 </template>
 

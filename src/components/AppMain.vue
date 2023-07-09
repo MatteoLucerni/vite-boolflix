@@ -21,7 +21,7 @@ export default {
     props: {
         films: Array,
         series: Array,
-        isFirstSearch: Boolean
+        isFirstSearch: Boolean,
     }
 }
 </script>
