@@ -27,10 +27,11 @@ export default {
 </script>
 
 <template>
-    <div class="container pt-5">
+    <div class="container pt-5 text-white">
         <div v-if="films.length || series.length">
             <a class="btn btn-secondary mb-5" href="#series">Vai alle Serie</a>
-            <h1 class="text-white">Film:</h1>
+            <h1 v-if="films.length">Film:</h1>
+            <h1 v-else>Nessaun film trovato</h1>
             <div class="row">
                 <div v-for="film in films" :key="film.name" class="col-12 col-md-6 col-xl-4">
                     <AppCard :title="film.title" :original-title="film.original_title"
@@ -39,7 +40,8 @@ export default {
                 </div>
             </div>
             <hr>
-            <h1 class="text-white">Serie Tv:</h1>
+            <h1 v-if="series.length">Serie Tv:</h1>
+            <h1 v-else>Nessauna serie trovata</h1>
             <div class="row">
                 <div id="series" v-for="serie in series" :key="serie.name" class="col-12 col-md-6 col-xl-4">
                     <AppCard :title="serie.name" :original-title="serie.original_name"
