@@ -38,8 +38,6 @@ export default {
           // funzione per selezionare il genere corrente
           this.getContentGenre(this.filmsGenres, this.films)
           this.getContentGenre(this.seriesGenres, this.series)
-
-          console.log(res.data)
         }
       )
     },
@@ -49,6 +47,9 @@ export default {
       // monto l'endpoint con il parametro dinamico
       const filteredUriFilms = `${this.baseUri}/search/movie?api_key=${this.api_key}&query=${string}&language=it-IT`
       const filteredUriSeries = `${this.baseUri}/search/tv?api_key=${this.api_key}&query=${string}&language=it-IT`
+
+      // fetch genres list
+      this.fetchGenresList()
       // richiamo la funzione che ha la call usando l'endpoint nuovo
       this.fetchContent(filteredUriFilms, 'movie')
       this.fetchContent(filteredUriSeries, 'tv')
